@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	iframe{border:0px solid red;}
+	
+	#content{
+		width:1000px;
+		margin:0 auto;
+	}
+	#content>img{width:100%;}
+	
+	/*공지사항*/
+	#notice{
+		width:400px;
+		height:400px;
+		position:absolute;
+		border:1px solid gray;
+		background-color:#fff;
+		left:300px;
+		top:100px;
+	}
+	#title>div{
+		height:40px;
+		line-height:40px;
+		float:left;
+		
+	}
+	#title>div:first-child{
+		width:75%;
+		padding-left:10px;
+		background-color:gray;
+	}	
+	#title>div:last-child{
+		width:20%;
+		text-align:right;
+		padding-right:10px;
+	}
+</style>
+<script>
+	//공지사항 닫기
+	function noticeClose(){
+		document.getElementById("notice").style.display="none";
+	}
+	//공지사항 이동하기
+	function noticeXY(){
+		document.getElementById("notice").style.left = "300px";
+		document.getElementById("notice").style.top = "100px";
+	}
+	//공지사항 박스좌표   마우스다운좌표
+	var divX, divY, eventX, eventY, moveX, moveY, flag=false;
+	function noticeMoveStart(){
+		//divX = parseInt(document.getElementById("notice").style.left);  // 300px
+		divX = document.getElementById("notice").offsetLeft;  //300
+		divY = document.getElementById("notice").offsetTop;
+		
+		//클릭한 위치의 x, y좌표구하기
+		eventX = event.clientX;
+		eventY = event.clientY;
+		
+		flag = true;
+		document.onmousemove = noticeMove;
+	}
+	function noticeMove(){
+		if(flag){
+			//마우스 이동한곳의 좌표
+			moveX = event.clientX;
+			moveY = event.clientY;
+			
+			//이동한 pixcel 계산하기
+			var x = moveX - eventX;
+			var y = moveY - eventY;
+			document.getElementById("notice").style.left = divX+x+"px";
+			document.getElementById("notice").style.top = divY+y+"px";
+		}
+	}
+	function flagSet(){
+		flag = false;
+	}
+	document.onmouseup = flagSet; 
+</script>
+</head>
+<!-- <body onload="noticeXY()">//-->
+<body>
+<iframe src="postMovie/movieSlide.html"  width="100%" height="130"></iframe>
+<hr/>
+<div id="content">
+ 	<img src="../img/4.jpg"/><br/>
+ 	손흥민이 풀타임 활약한 토트넘이 불가리아 원정에서 힘겨운 역전승을 기록했다.
+토트넘은 18일 오전 1시(한국시간) 불가리아 플로브디프의 로코모티브 플로브디프 스타디움에서 열린 2020-21시즌 유럽축구연맹(UEFA) 유로파리그(UEL) 2차 예선에서 로코모티브 플로브디프에 2-1 역전승을 거뒀고, 3차 예선에 진출했다.
+토트넘이 로테이션을 가동할 것이라 예상됐지만 핵심 선수들을 대부분 투입하며 승리를 노렸다. 주제 무리뉴 감독은 케인을 비롯해 손흥민, 베르바인, 로 셀소, 시소코, 호이비에르, 데이비스, 산체스, 다이어, 도허티, 요리스를 선발로 내세웠다. 벤치에는 모우라, 라멜라, 세세뇽, 은돔벨레, 윙크스, 하트가 대기했고, 알리는 아예 명단에서 제외됐다.
+토트넘이 주도권을 잡으며 찬스를 만들었다. 전반 1분 역습 상황에서 손흥민이 공을 받아 날카로운 슈팅을 시도했지만 골키퍼에게 막혔다. 토트넘이 결정적인 찬스를 놓쳤다. 전반 10분 측면에서 로 셀소가 내준 볼을 베르바인이 논스톱 슈팅을 시도했지만 골대를 강타했다.
+답답한 흐름이 이어졌다. 상대가 의도적으로 수비 라인을 내리며 토트넘의 공격을 막는데 집중했고, 공격 작업은 답답했다. 전반 27분에는 케인이 중앙에서 상대 한 명을 제치고 강력한 슈팅을 시도했지만 살짝 빗나갔다. 결국 전반은 0-0으로 끝이 났다.
+답답한 흐름은 후반에도 이어졌다. 이에 토트넘이 후반 15분 시소코를 빼고 은돔벨레를 투입하며 중원에서 공격을 강화했다. 토트넘이 찬스를 잡았다. 후반 20분 케인이 프리킥 찬스를 잡아 강하게 감았지만 수비벽에 막혔다.
+</div>
+
+<!-- 공지사항  Div -->
+<div id="notice">
+	<div id="title">
+		<div onmousedown="noticeMoveStart()">공지사항</div>
+		<div onclick="noticeClose()">Close</div>
+	</div>
+	<div id="noticeContent">
+		<img src="../img/book.jfif" width="100%"/>
+	</div>
+</div>
+</body>
+</html>
